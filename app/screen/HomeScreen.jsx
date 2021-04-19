@@ -3,6 +3,7 @@ import React, {useEffect, useState} from 'react';
 import UserApi from "../src/api/UserApi";
 import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {SearchBar} from 'react-native-elements';
+import MapView, {Marker} from "react-native-maps";
 
 
 // const styles = StyleSheet.create({
@@ -45,12 +46,12 @@ const HomeScreen = ({navigation}) => {
         // onChangeText={this.updateSearch}
         // value={search}
       />
-      <View style={{flex: 6, backgroundColor: "red"}}>
+      <View style={{flex: 6 , backgroundColor: "red"}}>
         <ScrollView style={{flex: 1, backgroundColor: 'red'}}>
           <View style={styles.container}>
             {
               users.map(user => {
-                return <TouchableOpacity onPress={() => {
+                return <TouchableOpacity key={user.id} onPress={() => {
                   navigation.navigate('UserDetails', {id: user.id})
                 }}>
                   <Text style={{height: 80}}>{user.name}</Text>
@@ -59,9 +60,34 @@ const HomeScreen = ({navigation}) => {
             }
           </View>
         </ScrollView>
-
       </View>
-      <View style={{flex: 3, backgroundColor: "darkorange"}}/>
+
+
+      <View style={{flex: 3, backgroundColor: "darkorange"}}>
+        <MapView style={{flex: 1}}
+                 initialRegion={{
+                   latitude: 37.78825,
+                   longitude: -122.4324,
+                   latitudeDelta: 0.0922,
+                   longitudeDelta: 0.0421,
+                 }} zoomEnabled={true}
+        >
+          {
+            users.map(user =>
+              <Marker
+                coordinate={{
+                  latitude: +user.address.geo.lat ?? 37.78825,
+                  longitude: +user.address.geo.lng?? -122.4324,
+                  // latitude: 37.78825,
+                  // longitude: -122.4324,
+                }}
+                title={user.name}
+                // description={marker.description}
+              />
+            )
+          }
+        </MapView>
+      </View>
     </View>
 
 
@@ -108,7 +134,7 @@ const HomeScreen = ({navigation}) => {
     //             aliquip ex ea commodo consequat. Duis aute irure dolor in
     //             reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
     //             pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-    //             culpa qui officia deserunt mollit anim id est laborum.
+    //             culpaawait  qui officia deserunt mollit anim id est laborum.
     //         </Text>
     //     </ScrollView>
     //     <ScrollView style={{flex: 2, backgroundColor: 'pink'}}>

@@ -1,26 +1,77 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, Image } from 'react-native'
-import UserApi from '../src/api/UserApi'
+import { StyleSheet, Text, Image, ScrollView } from 'react-native'
+import AlbumApi from '../src/api/AlbumApi'
 
 const AlbumDetailsScreen = ({ navigation, route }) => {
-  const { id } = route.params
+  const { id, title } = route.params
+
+  const [photos, setPhotos] = useState({})
+  console.log('photos: ' + photos)
+
+  useEffect(() => {
+    AlbumApi.getPhotoByAlbum(id).then(data => setPhotos(data))
+  }, [])
 
   return (
-    <View>
-      <Text>Album id: {id}</Text>
+    <ScrollView style={styles.albumDetailsContainer}>
+      <Text style={styles.albumDetailsTitle}>{title}</Text>
+      {/* {photos.map(photo => (
+        <Image
+          key={photo.id}
+          source={{ uri: photo.thumbnailUrl }}
+          style={styles.albumDetailsImage}
+        />
+      ))} */}
+
       <Image
-        source={{
-          uri: 'https://reactnative.dev/img/tiny_logo.png'
-        }}
+        style={styles.albumDetailsImage}
+        source={require('./../../assets/adaptive-icon.png')}
       />
-    </View>
+      <Image
+        style={styles.albumDetailsImage}
+        source={require('./../../assets/adaptive-icon.png')}
+      />
+      <Image
+        style={styles.albumDetailsImage}
+        source={require('./../../assets/adaptive-icon.png')}
+      />
+      <Image
+        style={styles.albumDetailsImage}
+        source={require('./../../assets/adaptive-icon.png')}
+      />
+      <Image
+        style={styles.albumDetailsImage}
+        source={require('./../../assets/adaptive-icon.png')}
+      />
+      <Image
+        style={styles.albumDetailsImage}
+        source={require('./../../assets/adaptive-icon.png')}
+      />
+      <Image
+        style={styles.albumDetailsImage}
+        source={require('./../../assets/adaptive-icon.png')}
+      />
+    </ScrollView>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  albumDetailsContainer: {
     flex: 1,
-    backgroundColor: 'blue'
+    padding: 16
+  },
+  albumDetailsTitle: {
+    marginBottom: 16,
+    fontSize: 20,
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  },
+  albumDetailsImage: {
+    height: 200,
+    width: 'auto',
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: 'grey'
   }
 })
 

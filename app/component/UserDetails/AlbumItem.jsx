@@ -1,21 +1,46 @@
-import tailwind from "tailwind-rn";
-import {Image, Text, TouchableOpacity} from "react-native";
-import React from "react";
-import {useNavigation} from "@react-navigation/native";
+import { Image, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import React from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { color } from 'react-native-reanimated'
 
-const AlbumItem = ({id, title}) => {
+const AlbumItem = ({ id, title }) => {
+  const navigation = useNavigation()
 
-    const navigation = useNavigation();
-
-    return (
-        <TouchableOpacity
-            style={tailwind('h-28 bg-gray-200 flex-1 flex-row items-center')}
-            onPress={() => navigation.navigate('AlbumDetails', {id})}
-        >
-            <Image source={require('./../../../assets/adaptive-icon.png')} style={{width: 100, height: 100}}/>
-            <Text>{title.substring(0, 15)}...</Text>
-        </TouchableOpacity>
-    )
+  return (
+    <TouchableOpacity
+      style={styles.albumItemContainer}
+      onPress={() => navigation.navigate('AlbumDetails', { id, title })}
+    >
+      <Image
+        source={require('./../../../assets/adaptive-icon.png')}
+        style={styles.albumItemImage}
+      />
+      <Text style={styles.albumItemTitle}>{title.substring(0, 15)}</Text>
+    </TouchableOpacity>
+  )
 }
 
-export default AlbumItem;
+const styles = StyleSheet.create({
+  albumItemContainer: {
+    flex: 1,
+    alignItems: 'center',
+    flexDirection: 'row',
+    height: 100,
+    marginBottom: 16
+  },
+  albumItemImage: {
+    flex: 1,
+    height: 100,
+    borderWidth: 1,
+    borderColor: 'grey'
+  },
+  albumItemTitle: {
+    flex: 2,
+    alignItems: 'center',
+    marginLeft: 16,
+    fontWeight: 'bold',
+    textTransform: 'uppercase'
+  }
+})
+
+export default AlbumItem

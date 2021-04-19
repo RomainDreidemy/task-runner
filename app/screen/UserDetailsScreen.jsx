@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View} from "react-native";
+import {Alert, ScrollView, StyleSheet, Switch, Text, TouchableOpacity, View} from "react-native";
 import UserApi from "../src/api/UserApi";
 import tailwind from "tailwind-rn";
 
@@ -28,10 +28,17 @@ const UserDetailsScreen = ({ navigation, route }) => {
             <Text style={tailwind('text-xl mt-3 mb-3')}>TODOs</Text>
             {
                 todos.map(todo => {
-                    return <TouchableOpacity style={tailwind('h-12 bg-green-300 mb-2')} onPress={() => {
+                    return <TouchableOpacity style={tailwind('h-12 bg-green-300 mb-2 flex-1 flex-row justify-between p-2 items-center')} onPress={() => {
                         navigation.navigate('TodoDetails', {id: todo.id})
                     }}>
-                        <Text>Truc à faire</Text>
+                        <Text>{todo.title.substring(1, 30)}{todo.title.length > 30 ? '...' : ''}</Text>
+                        <Switch
+                            trackColor={{ false: "#767577", true: "#81b0ff" }}
+                            thumbColor={todo.completed ? "#f5dd4b" : "#f4f3f4"}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={(val) => {todo.completed = val}}
+                            value={todo.completed}
+                        />
                     </TouchableOpacity>
                 })
             }
@@ -39,7 +46,9 @@ const UserDetailsScreen = ({ navigation, route }) => {
             <Text style={tailwind('text-xl mt-3 mb-3')}>Albums</Text>
             {
                 albums.map(album => {
-                    return <TouchableOpacity>
+                    return <TouchableOpacity onPress={() => {
+                        navigation.navigate('AlbumDetails', {id: album.id})
+                    }}>
                         <Text>{album.title}</Text>
                     </TouchableOpacity>
                 })

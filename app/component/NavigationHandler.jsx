@@ -5,7 +5,7 @@ import HomeScreen from "../screen/HomeScreen";
 import {SafeAreaView} from "react-native";
 import AlbumDetailsScreen from "../screen/AlbumDetailsScreen";
 import UserDetailsScreen from "../screen/UserDetailsScreen";
-import PostDetailsScreen from "../screen/PostDetailsScreen";
+import TodoDetailsScreen from "../screen/TodoDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -22,8 +22,8 @@ const NavigationHandler = () => {
                     component={UserDetailsScreen}
                 />
                 <Stack.Screen
-                    name="PostDetails"
-                    component={PostDetailsScreen}
+                    name="TodoDetails"
+                    component={TodoDetailsScreen}
                 />
                 <Stack.Screen
                     name="AlbumDetails"

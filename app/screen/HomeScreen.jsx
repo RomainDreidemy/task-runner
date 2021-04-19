@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
 
 import UserApi from "../src/api/UserApi";
-import {ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {SearchBar} from 'react-native-elements';
 
 
 // const styles = StyleSheet.create({
@@ -31,17 +32,21 @@ const HomeScreen = ({navigation}) => {
   }, [])
 
   return (
+
     <View style={[{
       flex: 1,
-      padding: 20,
+      padding: 10,
     }, {
       // Try setting `flexDirection` to `"row"`.
       flexDirection: "column"
     }]}>
-      <View style={{flex: 1, backgroundColor: "purple"}}/>
-
+      <SearchBar
+        placeholder="Type Here..."
+        // onChangeText={this.updateSearch}
+        // value={search}
+      />
       <View style={{flex: 6, backgroundColor: "red"}}>
-        <ScrollView style={{flex: 6, backgroundColor: 'red'}}>
+        <ScrollView style={{flex: 1, backgroundColor: 'red'}}>
           <View style={styles.container}>
             {
               users.map(user => {
@@ -54,11 +59,44 @@ const HomeScreen = ({navigation}) => {
             }
           </View>
         </ScrollView>
+
       </View>
-      <View style={{flex: 2, backgroundColor: "darkorange"}}/>
-      <View style={{flex: 3, backgroundColor: "green"}}/>
+      <View style={{flex: 3, backgroundColor: "darkorange"}}/>
     </View>
 
+
+
+
+
+
+
+    // <View style={[{
+    //   flex: 1,
+    //   padding: 20,
+    // }, {
+    //   // Try setting `flexDirection` to `"row"`.
+    //   flexDirection: "column"
+    // }]}>
+    //
+    //
+    //   <View style={{flex: 6, backgroundColor: "red"}}>
+    //     <ScrollView style={{flex: 6, backgroundColor: 'red'}}>
+    //       <View style={styles.container}>
+    //         {
+    //           users.map(user => {
+    //             return <TouchableOpacity onPress={() => {
+    //               navigation.navigate('UserDetails', {id: user.id})
+    //             }}>
+    //               <Text style={{height: 80}}>{user.name}</Text>
+    //             </TouchableOpacity>
+    //           })
+    //         }
+    //       </View>
+    //     </ScrollView>
+    //   </View>
+    //   <View style={{flex: 2, backgroundColor: "darkorange"}}/>
+    //   <View style={{flex: 3, backgroundColor: "green"}}/>
+    // </View>
 
 
     // <SafeAreaView style={styles.container}>
@@ -90,10 +128,10 @@ const HomeScreen = ({navigation}) => {
 
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 6,
-        backgroundColor: 'blue'
-    },
+  container: {
+    flex: 6,
+    backgroundColor: 'blue'
+  },
 });
 
 export default HomeScreen;

@@ -21,11 +21,12 @@ const UserDetailsScreen = ({ route }) => {
 
     return (
         <ScrollView style={tailwind('p-5')}>
-            <Text style={tailwind('mb-1')}>Nom: {user.name}</Text>
-            <Text style={tailwind('mb-1')}>Société: {user.company?.name}</Text>
-            <Text style={tailwind('mb-1')}>Email: {user.email}</Text>
-            <Text style={tailwind('mb-1')}>Téléphone {user.phone}</Text>
-            <Text style={tailwind('mb-1')}>{user.name}</Text>
+            <View style={tailwind('border rounded-lg p-2 bg-white border-gray-200')}>
+                <Text style={tailwind('mb-1')}>Nom: {user.name}</Text>
+                <Text style={tailwind('mb-1')}>Société: {user.company?.name}</Text>
+                <Text style={tailwind('mb-1')}>Email: {user.email}</Text>
+                <Text style={tailwind('mb-1')}>Téléphone: {user.phone}</Text>
+            </View>
 
             <Text style={tailwind('text-xl mt-3 mb-3')}>TODOs</Text>
             {

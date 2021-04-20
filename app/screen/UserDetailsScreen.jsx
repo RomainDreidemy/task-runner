@@ -22,14 +22,14 @@ const UserDetailsScreen = ({ route }) => {
     return (
         <View style={styles.container}>
             <View style={styles.infosSection}>
-                <Text style={tailwind('mb-1')}>Nom: {user.name}</Text>
-                <Text style={tailwind('mb-1')}>Société: {user.company?.name}</Text>
-                <Text style={tailwind('mb-1')}>Email: {user.email}</Text>
-                <Text style={tailwind('mb-1')}>Téléphone: {user.phone}</Text>
+                <Text style={styles.infoLine}>Nom: {user.name}</Text>
+                <Text style={styles.infoLine}>Société: {user.company?.name}</Text>
+                <Text style={styles.infoLine}>Email: {user.email}</Text>
+                <Text style={styles.infoLine}>Téléphone: {user.phone}</Text>
             </View>
 
             <View style={styles.todosSection}>
-                <Text style={tailwind('text-xl mt-3 mb-3')}>TODOs</Text>
+                <Text style={styles.title}>TODOs</Text>
                 <FlatList
                     data={todos}
                     keyExtractor={({id}) => id}
@@ -39,7 +39,7 @@ const UserDetailsScreen = ({ route }) => {
 
             <View style={styles.albumsSection}>
                 <Text style={styles.title}>Albums</Text>
-                <View style={tailwind('h-8 bg-gray-500')} />
+                <View style={styles.albumsBlock} />
                 <FlatList
                     data={albums}
                     keyExtractor={({id}) => id}
@@ -62,11 +62,18 @@ const styles = {
         borderColor: '#eee',
         backgroundColor: '#fff'
     },
+    infoLine: {
+        marginBottom: 5,
+    },
     todosSection: {
         flex: 3
     },
     albumsSection: {
         flex: 2
+    },
+    albumsBlock: {
+      height: 30,
+      backgroundColor: '#5a5a5a'
     },
     title: {
         fontSize: 20,

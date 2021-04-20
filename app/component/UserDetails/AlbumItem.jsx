@@ -15,7 +15,7 @@ const AlbumItem = ({ id, title }) => {
         source={require('./../../../assets/adaptive-icon.png')}
         style={styles.albumItemImage}
       />
-      <Text style={styles.albumItemTitle}>{title.substring(0, 15)}</Text>
+      <Text style={styles.albumItemTitle}>{title.substring(0, 40)}</Text>
     </TouchableOpacity>
   )
 }

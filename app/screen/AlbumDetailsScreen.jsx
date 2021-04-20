@@ -5,8 +5,8 @@ import AlbumApi from '../src/api/AlbumApi'
 const AlbumDetailsScreen = ({ navigation, route }) => {
   const { id, title } = route.params
 
-  const [photos, setPhotos] = useState({})
-  console.log('photos: ' + photos)
+  const [photos, setPhotos] = useState([])
+  console.log({ photos })
 
   useEffect(() => {
     AlbumApi.getPhotoByAlbum(id).then(data => setPhotos(data))
@@ -15,42 +15,13 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
   return (
     <ScrollView style={styles.albumDetailsContainer}>
       <Text style={styles.albumDetailsTitle}>{title}</Text>
-      {/* {photos.map(photo => (
+      {photos.map(photo => (
         <Image
           key={photo.id}
           source={{ uri: photo.thumbnailUrl }}
           style={styles.albumDetailsImage}
         />
-      ))} */}
-
-      <Image
-        style={styles.albumDetailsImage}
-        source={require('./../../assets/adaptive-icon.png')}
-      />
-      <Image
-        style={styles.albumDetailsImage}
-        source={require('./../../assets/adaptive-icon.png')}
-      />
-      <Image
-        style={styles.albumDetailsImage}
-        source={require('./../../assets/adaptive-icon.png')}
-      />
-      <Image
-        style={styles.albumDetailsImage}
-        source={require('./../../assets/adaptive-icon.png')}
-      />
-      <Image
-        style={styles.albumDetailsImage}
-        source={require('./../../assets/adaptive-icon.png')}
-      />
-      <Image
-        style={styles.albumDetailsImage}
-        source={require('./../../assets/adaptive-icon.png')}
-      />
-      <Image
-        style={styles.albumDetailsImage}
-        source={require('./../../assets/adaptive-icon.png')}
-      />
+      ))}
     </ScrollView>
   )
 }

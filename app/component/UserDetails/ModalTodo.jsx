@@ -26,7 +26,10 @@ const ModalTodo = ({visible = false, onSuccess, onClose}) => {
                     <View style={styles.groupButton}>
                         <Pressable
                             style={[styles.button, styles.buttonOpen]}
-                            onPress={() => onSuccess(valueAddTodo)}
+                            onPress={() => {
+                                onSuccess(valueAddTodo)
+                                setValueAddTodo("")
+                            }}
                         >
                             <Text style={styles.textStyle}>Ajouter</Text>
                         </Pressable>

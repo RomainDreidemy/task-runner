@@ -22,9 +22,22 @@ const UserDetailsScreen = ({ route }) => {
     useEffect(() => {
         UserApi.getUser(id).then(data => setUser(data));
         UserApi.getAlbumsByUser(id).then(data => setAlbums(data));
-        UserApi.getTodosByUser(id).then(data => setTodos(data));
+        UserApi.getTodosByUser(id).then(data => setTodos(data.sort(todo => todo.completed)));
         UserApi.getPostsByUser(id).then(data => setPosts(data));
     }, []);
+
+    const addTodo = (title) => {
+        console.log();
+        console.log(todos.sort((x, y) => x.id - y.id)[todos.length-1].id)
+        const todo = {
+            userId: id,
+            id: todos.sort((x, y) => x.id - y.id)[todos.length-1].id + 1,
+            title,
+            completed: false
+        }
+
+        setTodos([todo, ...todos.sort(todo => todo.completed)]);
+    }
 
     return (
         <ScrollView style={styles.container}>
@@ -80,7 +93,7 @@ const UserDetailsScreen = ({ route }) => {
             visible={modalVisible}
             onSuccess={(value) => {
                 setModalVisible(false)
-                Alert.alert(value)
+                addTodo(value)
             }}
             onClose={() => setModalVisible(false)}
         />

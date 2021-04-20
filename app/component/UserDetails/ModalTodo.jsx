@@ -21,6 +21,7 @@ const ModalTodo = ({visible = false, onSuccess, onClose}) => {
                         onChangeText={(text) => setValueAddTodo(text)}
                         value={valueAddTodo}
                         placeholder="Ma nouvelle tâche"
+                        autoFocus={true}
                     />
                     <View style={styles.groupButton}>
                         <Pressable

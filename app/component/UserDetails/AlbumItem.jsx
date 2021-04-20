@@ -1,7 +1,6 @@
 import { Image, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native'
-import { color } from 'react-native-reanimated'
 
 const AlbumItem = ({ id, title }) => {
   const navigation = useNavigation()

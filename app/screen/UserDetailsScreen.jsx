@@ -1,14 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, Text, View} from "react-native";
+import {Alert, FlatList, Text, TextInput, View} from "react-native";
 import UserApi from "../src/api/UserApi";
 import TodoItem from "../component/UserDetails/TodoItem";
 import AlbumItem from "../component/UserDetails/AlbumItem";
-
+import ModalTodo from "../component/UserDetails/ModalTodo";
+import { Ionicons } from '@expo/vector-icons';
 const UserDetailsScreen = ({ route }) => {
 
     const [user, setUser] = useState({});
     const [todos, setTodos] = useState([]);
     const [albums, setAlbums] = useState([]);
+
+    const [modalVisible, setModalVisible] = useState(false);
 
     const {id} = route.params;
 
@@ -28,7 +31,10 @@ const UserDetailsScreen = ({ route }) => {
             </View>
 
             <View style={styles.todosSection}>
-                <Text style={styles.title}>TODOs</Text>
+                <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <Text style={styles.title}>TODOs</Text>
+                    <Ionicons  name="add-sharp" size={30} onPress={() => setModalVisible(true)} />
+                </View>
                 <FlatList
                     data={todos}
                     keyExtractor={({id}) => id}
@@ -45,6 +51,15 @@ const UserDetailsScreen = ({ route }) => {
                     renderItem={({item}) => <AlbumItem id={item.id} title={item.title}/>}
                 />
             </View>
+
+            <ModalTodo
+                visible={modalVisible}
+                onSuccess={(value) => {
+                    setModalVisible(false)
+                    Alert.alert(value)
+                }}
+                onClose={() => setModalVisible(false)}
+            />
         </View>
     )
 }

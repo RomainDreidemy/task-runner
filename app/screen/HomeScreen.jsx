@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 
 import UserApi from "../src/api/UserApi";
-import {ScrollView, StyleSheet, View} from 'react-native';
+import {ScrollView, StyleSheet, View,Text} from 'react-native';
 import MapView, {Marker} from "react-native-maps";
 import HomeUser from "../component/HomeUser";
 
@@ -45,7 +45,8 @@ const HomeScreen = ({navigation}) => {
 
 
       <View style={styles.homeMap}>
-        <MapView style={styles.homeMapView}
+        <Text style={styles.homeMapHeadline}>Maps</Text>
+        <MapView  style={styles.homeMapView}
                  initialRegion={{
                    latitude: 37.78825,
                    longitude: -122.4324,
@@ -69,16 +70,28 @@ const HomeScreen = ({navigation}) => {
 
 const styles = StyleSheet.create({
   home: {
-    flex: 1
+    flex: 1,
+    padding:20,
+    backgroundColor: 'white'
   },
+
+
   homeUsers: {
-    flex: 6,
-    backgroundColor: "red"
+    flex: 1,
+    backgroundColor: "white"
+
   },
 
   homeMap: {
     flex: 1,
-    backgroundColor: "darkorange"
+    backgroundColor: "white"
+  },
+
+  homeMapHeadline: {
+    fontSize:25,
+    fontWeight:'bold',
+    paddingTop:30,
+    paddingBottom:20,
   },
 
   homeMapView: {

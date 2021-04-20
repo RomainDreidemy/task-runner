@@ -20,15 +20,15 @@ const UserDetailsScreen = ({ route }) => {
     }, []);
 
     return (
-        <View style={tailwind('p-2 flex-1')}>
-            <View style={tailwind('border rounded-lg p-2 bg-white border-gray-200')}>
+        <View style={styles.container}>
+            <View style={styles.infosSection}>
                 <Text style={tailwind('mb-1')}>Nom: {user.name}</Text>
                 <Text style={tailwind('mb-1')}>Société: {user.company?.name}</Text>
                 <Text style={tailwind('mb-1')}>Email: {user.email}</Text>
                 <Text style={tailwind('mb-1')}>Téléphone: {user.phone}</Text>
             </View>
 
-            <View style={{flex: 3}}>
+            <View style={styles.todosSection}>
                 <Text style={tailwind('text-xl mt-3 mb-3')}>TODOs</Text>
                 <FlatList
                     data={todos}
@@ -37,8 +37,8 @@ const UserDetailsScreen = ({ route }) => {
                 />
             </View>
 
-            <View style={{flex: 2}}>
-                <Text style={tailwind('text-xl mt-3 mb-3')}>Albums</Text>
+            <View style={styles.albumsSection}>
+                <Text style={styles.title}>Albums</Text>
                 <View style={tailwind('h-8 bg-gray-500')} />
                 <FlatList
                     data={albums}
@@ -48,6 +48,29 @@ const UserDetailsScreen = ({ route }) => {
             </View>
         </View>
     )
+}
+
+const styles = {
+    container: {
+        flex: 1,
+        padding: 10,
+    },
+    infosSection: {
+        border: 1,
+        borderRadius: 15,
+        borderColor: '#eee',
+        backgroundColor: '#fff'
+    },
+    todosSection: {
+        flex: 3
+    },
+    albumsSection: {
+        flex: 2
+    },
+    title: {
+        fontSize: 20,
+        marginVertical: 15
+    }
 }
 
 export default UserDetailsScreen;

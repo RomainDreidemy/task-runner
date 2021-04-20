@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {FlatList, Text, View} from "react-native";
 import UserApi from "../src/api/UserApi";
-import tailwind from "tailwind-rn";
 import TodoItem from "../component/UserDetails/TodoItem";
 import AlbumItem from "../component/UserDetails/AlbumItem";
 

@@ -1,4 +1,3 @@
-import tailwind from "tailwind-rn";
 import {Switch, Text, TouchableOpacity} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useNavigation} from "@react-navigation/native";

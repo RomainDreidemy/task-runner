@@ -46,21 +46,21 @@ const HomeScreen = ({navigation}) => {
         // onChangeText={this.updateSearch}
         // value={search}
       />
-      {/*<View style={{flex: 6 , backgroundColor: "red"}}>*/}
-      {/*  <ScrollView style={{flex: 1, backgroundColor: 'red'}}>*/}
-      {/*    <View style={styles.container}>*/}
-      {/*      {*/}
-      {/*        users.map(user => {*/}
-      {/*          return <TouchableOpacity key={user.id} onPress={() => {*/}
-      {/*            navigation.navigate('UserDetails', {id: user.id})*/}
-      {/*          }}>*/}
-      {/*            <Text style={{height: 80}}>{user.name}</Text>*/}
-      {/*          </TouchableOpacity>*/}
-      {/*        })*/}
-      {/*      }*/}
-      {/*    </View>*/}
-      {/*  </ScrollView>*/}
-      {/*</View>*/}
+      <View style={{flex: 6 , backgroundColor: "red"}}>
+        <ScrollView style={{flex: 1, backgroundColor: 'red'}}>
+          <View style={styles.container}>
+            {
+              users.map(user => {
+                return <TouchableOpacity key={user.id} onPress={() => {
+                  navigation.navigate('UserDetails', {id: user.id})
+                }}>
+                  <Text style={{height: 80}}>{user.name}</Text>
+                </TouchableOpacity>
+              })
+            }
+          </View>
+        </ScrollView>
+      </View>
 
 
       <View style={{flex: 1, backgroundColor: "darkorange"}}>
@@ -152,7 +152,6 @@ const HomeScreen = ({navigation}) => {
   )
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 6,
@@ -160,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default HomeScreen

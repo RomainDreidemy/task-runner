@@ -38,7 +38,7 @@ const HomeScreen = ({navigation}) => {
       <View style={styles.homeUsers}>
         <ScrollView>
           {
-            users.map(user => <HomeUser user={user} navigation={navigation}/>)
+            users.map(user => <HomeUser user={user} key={user.id} navigation={navigation}/>)
           }
         </ScrollView>
       </View>
@@ -52,12 +52,13 @@ const HomeScreen = ({navigation}) => {
                    longitude: -122.4324,
                    latitudeDelta: 0.0922,
                    longitudeDelta: 0.0421,
-                 }} zoomEnabled={true}
+                 }} zoomEnabled={true} maxZoomLevel={1}
         >
           {
             users.map(user =>
               <Marker coordinate={{latitude: +user.address.geo.lat, longitude: +user.address.geo.lng}}
-                      title={user.name}
+                      title={user.name} key={user.id} onPress={() => {
+                navigation.navigate('UserDetails', {id: user.id})}}
               />
             )
           }

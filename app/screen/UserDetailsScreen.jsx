@@ -56,6 +56,7 @@ const styles = {
         padding: 10,
     },
     infosSection: {
+        padding: 10,
         border: 1,
         borderRadius: 15,
         borderColor: '#eee',

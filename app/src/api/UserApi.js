@@ -22,13 +22,13 @@ class UserApi extends BaseApi{
     async getTodosByUser(id)
     {
         const {data} = await this.get(`/users/${id}/todos`);
-        return data;
+        return data
     }
 
     async getPostsByUser(id)
     {
-        const {data} = await this.get(`users/${id}/posts`);
-        return data 
+        const {data} = await this.get(`/users/${id}/posts`);
+        return data
     }
 }
 

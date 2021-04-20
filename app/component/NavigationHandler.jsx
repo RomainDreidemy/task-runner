@@ -2,10 +2,10 @@ import React from 'react';
 import {NavigationContainer} from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from "../screen/HomeScreen";
-import {SafeAreaView} from "react-native";
 import AlbumDetailsScreen from "../screen/AlbumDetailsScreen";
 import UserDetailsScreen from "../screen/UserDetailsScreen";
 import TodoDetailsScreen from "../screen/TodoDetailsScreen";
+import PostDetailsScreen from "../screen/PostDetailsScreen";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +28,10 @@ const NavigationHandler = () => {
                 <Stack.Screen
                     name="AlbumDetails"
                     component={AlbumDetailsScreen}
+                />
+                <Stack.Screen
+                    name="PostDetails"
+                    component={PostDetailsScreen}
                 />
             </Stack.Navigator>
         </NavigationContainer>

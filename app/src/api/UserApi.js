@@ -27,7 +27,7 @@ class UserApi extends BaseApi{
 
     async getPostsByUser(id)
     {
-        const {data} = await this.get(`users/${id}/posts`);
+        const {data} = await this.get(`/users/${id}/posts`);
         return data
     }
 }

@@ -5,17 +5,15 @@ import PostContent from './../component/PostContent'
 import PostComment from '../component/PostComment'
 
 const PostDetailsScreen = ({ route }) => {
-  const { postId } = route.params
+  const { id } = route.params
 
   const [postContent, setPostContent] = useState({})
   const [comments, setComments] = useState([])
 
   useEffect(() => {
-    ;(async function () {
-      setPostContent(await PostApi.getPost(postId))
-      setComments(await PostApi.getCommentsByPost(postId))
-    })()
-  }, [postId])
+      PostApi.getPost(id).then(data => setPostContent(data))
+      PostApi.getCommentsByPost(id).then(data => setComments(data))
+  }, [])
 
   return (
     <View>

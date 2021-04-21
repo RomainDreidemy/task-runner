@@ -21,14 +21,10 @@ const UserDetailsScreen = ({ route }) => {
     const {id} = route.params;
 
     useEffect(() => {
-        // UserApi.getUser(id).then(data => setUser(data));
-        UserService.retrieveUser(id).then(user => {
-            setUser(user)
-            console.log(user)
-        })
-        UserApi.getAlbumsByUser(id).then(data => setAlbums(data));
-        UserApi.getTodosByUser(id).then(data => setTodos(data.sort(todo => todo.completed)));
-        UserApi.getPostsByUser(id).then(data => setPosts(data));
+        UserService.retrieveUser(id).then(data => setUser(data));
+        UserService.retrieveTodos(id).then(data => setTodos(data.sort(todo => todo.completed)));
+        UserService.retrieveAlbums(id).then(data => setAlbums(data));
+        UserService.retrievePosts(id).then(data => setPosts(data));
     }, []);
 
     const addTodo = (title) => {

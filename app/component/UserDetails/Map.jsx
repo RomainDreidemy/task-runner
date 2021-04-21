@@ -11,7 +11,9 @@ const Map = ({user_id, lat, lng, title}) => {
               latitudeDelta: 0.0922,
               longitudeDelta: 0.0421,
             }}
-            zoomEnabled={true}
+            zoomEnabled={false}
+            rotateEnabled={false}
+            scrollEnabled={false}
             maxZoomLevel={3}
         >
             <Marker coordinate={{latitude: +lat, longitude: +lng}}

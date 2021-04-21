@@ -18,8 +18,7 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
   const [modalVisible, setModalVisible] = useState(false)
 
   const onPhotoClick = photo => {
-    console.log('click')
-    setSelectedPhoto(photo.url)
+    setSelectedPhoto(photo)
   }
 
   useEffect(() => {
@@ -33,9 +32,10 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
       {photos.map(photo => (
         <View key={photo.id}>
           <Pressable
-            onPress={
-              (() => setModalVisible(!modalVisible), onPhotoClick(photo))
-            }
+            onPress={() => {
+              setModalVisible(!modalVisible)
+              onPhotoClick(photo)
+            }}
           >
             <Image
               source={{ uri: photo.thumbnailUrl }}

@@ -1,14 +1,17 @@
 import React from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
+import {useNavigation} from "@react-navigation/native";
 
-const HomeUser = ({ user, navigation }) => (
-  <TouchableOpacity style={styles.user} key={user.id} onPress={() => {
-    navigation.navigate('UserDetails', {id: user.id})
-  }}>
-    <View style={styles.userImage}></View>
-    <Text style={styles.userText}>{user.name}</Text>
-  </TouchableOpacity>
-)
+const HomeUser = ({ user }) => {
+  const navigation = useNavigation();
+
+  return (
+      <TouchableOpacity style={styles.user} onPress={() => navigation.navigate('UserDetails', {id: user.id})}>
+        <View style={styles.userImage} />
+        <Text style={styles.userText}>{user.name}</Text>
+      </TouchableOpacity>
+  )
+}
 
 
 const styles = StyleSheet.create({

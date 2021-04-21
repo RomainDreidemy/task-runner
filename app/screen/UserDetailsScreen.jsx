@@ -8,6 +8,7 @@ import { Ionicons } from '@expo/vector-icons';
 import PostItem from "../component/UserDetails/PostItem";
 import Map from "../component/UserDetails/Map";
 import MapView, {Marker} from "react-native-maps";
+import UserService from "../src/service/UserService";
 const UserDetailsScreen = ({ route }) => {
 
     const [user, setUser] = useState({});
@@ -20,7 +21,11 @@ const UserDetailsScreen = ({ route }) => {
     const {id} = route.params;
 
     useEffect(() => {
-        UserApi.getUser(id).then(data => setUser(data));
+        // UserApi.getUser(id).then(data => setUser(data));
+        UserService.retrieveUser(id).then(user => {
+            setUser(user)
+            console.log(user)
+        })
         UserApi.getAlbumsByUser(id).then(data => setAlbums(data));
         UserApi.getTodosByUser(id).then(data => setTodos(data.sort(todo => todo.completed)));
         UserApi.getPostsByUser(id).then(data => setPosts(data));

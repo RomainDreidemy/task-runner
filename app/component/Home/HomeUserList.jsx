@@ -7,8 +7,8 @@ const HomeUserList = ({users = []}) => {
         <View style={styles.users}>
             <FlatList
                 data={users}
-                keyExtractor={item => item.id}
-                renderItem={({item}) => <HomeUser user={item} key={item.id}/>}
+                keyExtractor={item => item.id.toString()}
+                renderItem={({item}) => <HomeUser user={item}/>}
             />
         </View>
     )

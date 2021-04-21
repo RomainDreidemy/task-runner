@@ -4,8 +4,8 @@ import UserApi from "../src/api/UserApi";
 import {Alert, StyleSheet, View} from 'react-native';
 import HomeMap from "../component/Home/HomeMap";
 import HomeUserList from "../component/Home/HomeUserList";
-import LocalStorageService from "../src/service/LocalStorageService";
 import UserService from "../src/service/UserService";
+import IsConnected from "../_share/isConnected";
 
 const HomeScreen = () => {
   const [users, setUsers] = useState([]);
@@ -16,6 +16,7 @@ const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <IsConnected />
       <HomeUserList users={users} />
 
       <HomeMap users={users}/>

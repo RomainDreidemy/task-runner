@@ -27,7 +27,8 @@
     "tailwind-rn": "^3.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "@react-native-community/netinfo": "^6.0.0"
   },
   "private": true
 }

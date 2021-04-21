@@ -1,14 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, FlatList, ScrollView, Text, TextInput, View} from "react-native";
-import UserApi from "../src/api/UserApi";
+import {ScrollView, Text, View} from "react-native";
 import TodoItem from "../component/UserDetails/TodoItem";
 import AlbumItem from "../component/UserDetails/AlbumItem";
 import ModalTodo from "../component/UserDetails/ModalTodo";
 import { Ionicons } from '@expo/vector-icons';
 import PostItem from "../component/UserDetails/PostItem";
 import Map from "../component/UserDetails/Map";
-import MapView, {Marker} from "react-native-maps";
 import UserService from "../src/service/UserService";
+import IsConnected from "../_share/isConnected";
 const UserDetailsScreen = ({ route }) => {
 
     const [user, setUser] = useState({});
@@ -40,7 +39,7 @@ const UserDetailsScreen = ({ route }) => {
 
     return (
         <ScrollView style={styles.container}>
-
+            <IsConnected />
         <View>
             <View style={styles.infosSection}>
                 <View style={{padding: 20}}>

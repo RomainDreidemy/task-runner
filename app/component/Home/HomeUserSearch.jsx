@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
+import { StyleSheet, View, TextInput, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import debounce from "lodash.debounce";
 
@@ -9,6 +9,11 @@ const HomeUserSearch = ({ users, setFilteredUsers }) => {
   const handleSearchChange = (searchValue) => {
     setSearchText(searchValue)
     searchUsers(searchValue, users)
+  }
+
+  const resetSearch = () => {
+    setSearchText("")
+    setFilteredUsers(users)
   }
 
   const searchUsers = useCallback(
@@ -22,13 +27,23 @@ const HomeUserSearch = ({ users, setFilteredUsers }) => {
 
   return (
     <View style={styles.searchBar}>
-      <Ionicons style={styles.searchIcon} name="search" size={25} color="grey" />
+      <Ionicons style={[styles.icon, styles.searchIcon]} name="search" size={25} color="grey" />
       <TextInput
         style={styles.searchInput}
         onChangeText={handleSearchChange}
         value={searchText}
         placeholder="Search by name"
       />
+
+      {searchText.length > 0 &&
+        <Pressable
+          style={styles.searchReset}
+          onPress={resetSearch}
+        >
+          <Ionicons style={styles.resetIcon} name="close-circle" size={25} color="grey" />
+        </Pressable>
+      }
+
     </View>
   )
 }
@@ -52,11 +67,18 @@ const styles = StyleSheet.create({
   },
   searchInput: {
     flex: 1,
-    marginHorizontal: 10,
     fontSize: 16,
   },
+  icon: {
+    textAlignVertical: 'center'
+  },
   searchIcon: {
-    paddingLeft: 15,
-    textAlignVertical: 'center',
+    marginLeft: 15,
+    marginRight: 10
+  },
+  searchReset: {
+    justifyContent: 'center',
+    paddingHorizontal: 10,
+    opacity: 0.5
   }
 })

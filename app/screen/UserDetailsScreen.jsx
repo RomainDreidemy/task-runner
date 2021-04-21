@@ -28,8 +28,6 @@ const UserDetailsScreen = ({ route }) => {
     }, []);
 
     const addTodo = (title) => {
-        console.log();
-        console.log(todos.sort((x, y) => x.id - y.id)[todos.length-1].id)
         const todo = {
             userId: id,
             id: todos.sort((x, y) => x.id - y.id)[todos.length-1].id + 1,

@@ -57,10 +57,8 @@ class UserService
             })
 
             if(userTodos.length < 1){
-                console.log('userTodos inférieur à 1')
                 return await UserApi.getTodosByUser(user_id).then((todos => {
                     LocalStorageService.set('todos', todos, true);
-                    console.log(todos.length)
                     return todos;
                 }))
             }

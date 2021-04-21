@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from "../screen/HomeScreen";
 import AlbumDetailsScreen from "../screen/AlbumDetailsScreen";
 import UserDetailsScreen from "../screen/UserDetailsScreen";
-import TodoDetailsScreen from "../screen/TodoDetailsScreen";
 import PostDetailsScreen from "../screen/PostDetailsScreen";
 
 const Stack = createStackNavigator();
@@ -20,10 +19,6 @@ const NavigationHandler = () => {
                 <Stack.Screen
                     name="UserDetails"
                     component={UserDetailsScreen}
-                />
-                <Stack.Screen
-                    name="TodoDetails"
-                    component={TodoDetailsScreen}
                 />
                 <Stack.Screen
                     name="AlbumDetails"

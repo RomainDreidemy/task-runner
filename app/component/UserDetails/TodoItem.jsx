@@ -1,4 +1,4 @@
-import {Switch, Text, TouchableOpacity} from "react-native";
+import {Switch, Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import {useNavigation} from "@react-navigation/native";
 
@@ -14,10 +14,8 @@ const TodoItem = ({id, title, completed}) => {
 
 
     return (
-        <TouchableOpacity
-            style={isCompleted ? {...styles.global.container, ...styles.completedYes.container} : {...styles.global.container, ...styles.completedNo.container}}
-                          onPress={() => navigation.navigate('TodoDetails', {id})}
-        >
+        <View
+            style={isCompleted ? {...styles.global.container, ...styles.completedYes.container} : {...styles.global.container, ...styles.completedNo.container}}>
             <Text style={styles.global.text}>{title.substring(0, 30)}{title.length > 30 ? '...' : ''}</Text>
             <Switch
                 trackColor={{ false: "red", true: "green" }}
@@ -26,7 +24,7 @@ const TodoItem = ({id, title, completed}) => {
                 onValueChange={(val) => setIsCompleted(val)}
                 value={isCompleted}
             />
-        </TouchableOpacity>
+        </View>
     )
 }
 

@@ -1,25 +1,32 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 
-import UserApi from "../src/api/UserApi";
-import {Alert, StyleSheet, View} from 'react-native';
+import { StyleSheet, View, TextInput } from 'react-native';
 import HomeMap from "../component/Home/HomeMap";
+import HomeUserSearch from "../component/Home/HomeUserSearch";
 import HomeUserList from "../component/Home/HomeUserList";
 import UserService from "../src/service/UserService";
 import IsConnected from "../_share/isConnected";
 
 const HomeScreen = () => {
   const [users, setUsers] = useState([]);
+  const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
-      UserService.retrieveUsers().then(users => setUsers(users));
+    UserService.retrieveUsers().then(users => {
+      setUsers(users)
+      setFilteredUsers(users)
+    });
   }, [])
 
   return (
     <View style={styles.container}>
       <IsConnected />
-      <HomeUserList users={users} />
 
-      <HomeMap users={users}/>
+      <HomeUserSearch users={users} setFilteredUsers={setFilteredUsers} />
+
+      <HomeUserList users={filteredUsers} />
+
+      <HomeMap users={filteredUsers} />
     </View>
 
   )

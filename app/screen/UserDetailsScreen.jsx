@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
-import {Alert, FlatList, ScrollView, Text, TextInput, View} from "react-native";
-import UserApi from "../src/api/UserApi";
+import {ScrollView, Text, View} from "react-native";
 import TodoItem from "../component/UserDetails/TodoItem";
 import AlbumItem from "../component/UserDetails/AlbumItem";
 import ModalTodo from "../component/UserDetails/ModalTodo";
 import { Ionicons } from '@expo/vector-icons';
 import PostItem from "../component/UserDetails/PostItem";
 import Map from "../component/UserDetails/Map";
-import MapView, {Marker} from "react-native-maps";
+import UserService from "../src/service/UserService";
+import IsConnected from "../_share/isConnected";
 const UserDetailsScreen = ({ route }) => {
 
     const [user, setUser] = useState({});
@@ -20,15 +20,13 @@ const UserDetailsScreen = ({ route }) => {
     const {id} = route.params;
 
     useEffect(() => {
-        UserApi.getUser(id).then(data => setUser(data));
-        UserApi.getAlbumsByUser(id).then(data => setAlbums(data));
-        UserApi.getTodosByUser(id).then(data => setTodos(data.sort(todo => todo.completed)));
-        UserApi.getPostsByUser(id).then(data => setPosts(data));
+        UserService.retrieveUser(id).then(data => setUser(data));
+        UserService.retrieveTodos(id).then(data => setTodos(data.sort(todo => todo.completed)));
+        UserService.retrieveAlbums(id).then(data => setAlbums(data));
+        UserService.retrievePosts(id).then(data => setPosts(data));
     }, []);
 
     const addTodo = (title) => {
-        console.log();
-        console.log(todos.sort((x, y) => x.id - y.id)[todos.length-1].id)
         const todo = {
             userId: id,
             id: todos.sort((x, y) => x.id - y.id)[todos.length-1].id + 1,
@@ -41,7 +39,7 @@ const UserDetailsScreen = ({ route }) => {
 
     return (
         <ScrollView style={styles.container}>
-
+            <IsConnected />
         <View>
             <View style={styles.infosSection}>
                 <View style={{padding: 20}}>

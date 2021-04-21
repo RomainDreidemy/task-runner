@@ -53,8 +53,8 @@ const PostDetailsScreen = ({ route }) => {
 
           <FlatList
               data={comments}
-              keyExtractor={item => item.id}
-              renderItem={({item}) => <PostComment key={item.id} title={item.name} comment={item.body} />}
+              keyExtractor={item => item.id.toString()}
+              renderItem={({item}) => <PostComment title={item.name} comment={item.body} />}
           />
       </View>
 

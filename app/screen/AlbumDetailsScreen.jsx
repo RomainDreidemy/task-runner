@@ -14,7 +14,13 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
   const { id, title } = route.params
 
   const [photos, setPhotos] = useState([])
+  const [selectedPhoto, setSelectedPhoto] = useState('')
   const [modalVisible, setModalVisible] = useState(false)
+
+  const onPhotoClick = photo => {
+    console.log('click')
+    setSelectedPhoto(photo.url)
+  }
 
   useEffect(() => {
     AlbumApi.getPhotoByAlbum(id).then(data => setPhotos(data))
@@ -26,31 +32,10 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
 
       {photos.map(photo => (
         <View key={photo.id}>
-          <Modal
-            animationType='fade'
-            transparent
-            visible={modalVisible}
-            onRequestClose={() => {
-              setModalVisible(!modalVisible)
-            }}
-          >
-            <View style={styles.centeredView}>
-              <View style={styles.modalContainer}>
-                <Pressable onPress={() => setModalVisible(!modalVisible)}>
-                  <Text style={styles.modalClose}>Hide Modal</Text>
-                  <Image
-                    source={{ uri: photo.url }}
-                    onPress={() => setModalVisible(!modalVisible)}
-                    style={styles.modalImage}
-                  />
-                </Pressable>
-              </View>
-            </View>
-          </Modal>
-
           <Pressable
-            style={[styles.button, styles.buttonClose]}
-            onPress={() => setModalVisible(!modalVisible)}
+            onPress={
+              (() => setModalVisible(!modalVisible), onPhotoClick(photo))
+            }
           >
             <Image
               source={{ uri: photo.thumbnailUrl }}
@@ -60,6 +45,30 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
           </Pressable>
         </View>
       ))}
+
+      <Modal
+        animationType='fade'
+        transparent
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible)
+        }}
+      >
+        <View style={styles.centeredView}>
+          <Pressable
+            style={styles.modalContainer}
+            onPress={() => setModalVisible(!modalVisible)}
+          >
+            <Text style={styles.modalClose}>Hide Modal</Text>
+            <Image
+              source={{ uri: selectedPhoto.url }}
+              onPress={() => setModalVisible(!modalVisible)}
+              // onPhotoClick={}
+              style={styles.modalImage}
+            />
+          </Pressable>
+        </View>
+      </Modal>
     </ScrollView>
   )
 }
@@ -69,22 +78,23 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: 'auto',
     borderWidth: 1,
     borderColor: 'green'
   },
   modalContainer: {
     alignItems: 'center',
     maxHeight: 600,
-    width: 'auto',
+    height: '100%',
+    width: '100%',
     padding: 8,
     backgroundColor: 'white',
     borderRadius: 8
   },
   modalImage: {
     flex: 1,
-    // height: 'auto',
-    width: 300
+    width: '100%'
+    // width: '100%',
+    // backgroundColor: 'coral'
   },
   albumDetailsContainer: {
     flex: 1,

@@ -38,7 +38,7 @@ const styles = {
     },
 
     map: {
-        height: 250
+        height: 200
     }
 }
 

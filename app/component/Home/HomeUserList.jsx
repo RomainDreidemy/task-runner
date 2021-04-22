@@ -1,14 +1,14 @@
-import {FlatList, StyleSheet, View} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import HomeUser from "./HomeUser";
 import React from "react";
 
-const HomeUserList = ({users = []}) => {
+const HomeUserList = ({ users = [] }) => {
     return (
         <View style={styles.users}>
             <FlatList
                 data={users}
                 keyExtractor={item => item.id.toString()}
-                renderItem={({item}) => <HomeUser user={item}/>}
+                renderItem={({ item }) => <HomeUser user={item} />}
             />
         </View>
     )
@@ -16,9 +16,7 @@ const HomeUserList = ({users = []}) => {
 
 const styles = StyleSheet.create({
     users: {
-        flex: 1,
-        backgroundColor: "white",
-        padding:20
+        flex: 2
     }
 })
 

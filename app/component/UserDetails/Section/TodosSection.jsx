@@ -3,12 +3,12 @@ import {ScrollView, StyleSheet, Text, View} from "react-native";
 import {Ionicons} from "@expo/vector-icons";
 import TodoItem from "../TodoItem";
 
-const TodosSection = ({ todos }) => {
+const TodosSection = ({ todos, onOpenModal }) => {
     return (
         <View style={styles.todosSection}>
             <View style={styles.blockTitle}>
                 <Text style={styles.title}>Todos</Text>
-                <Ionicons  name="add-sharp" size={30} onPress={() => setModalVisible(true)} />
+                <Ionicons  name="add-sharp" size={30} onPress={() => onOpenModal()} />
             </View>
             <ScrollView style={{maxHeight: 300}}>
                 {

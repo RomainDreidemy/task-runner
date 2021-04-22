@@ -3,6 +3,7 @@ import {StyleSheet, Text, ScrollView, View, FlatList, TextInput, Button, Alert} 
 import PostApi from './../src/api/PostApi'
 import PostContent from './../component/PostContent'
 import PostComment from '../component/PostComment'
+import CommentList from "../component/PostDetails/CommentList";
 
 const PostDetailsScreen = ({ route }) => {
   const { id } = route.params
@@ -33,33 +34,12 @@ const PostDetailsScreen = ({ route }) => {
         }
     }
 
-  return (
-    <View style={styles.container}>
-      <PostContent title={postContent.title} body={postContent.body} />
-
-      <View style={styles.comments}>
-          <Text style={styles.title}>Comments</Text>
-
-          <View style={styles.newComment}>
-                <Text style={{marginBottom: 5}}>Ajoutez votre commentaire</Text>
-              <TextInput style={styles.input} placeholder={'Titre'} value={commentName} onChangeText={(value) => setCommentName(value)} />
-              <TextInput style={styles.input} placeholder={'contenu'} value={commentContent} onChangeText={(value) => setCommentContent(value)} />
-              <Button
-                  title="Envoyer le commentaire"
-                  color="#f194ff"
-                  onPress={() => addComment()}
-              />
-          </View>
-
-          <FlatList
-              data={comments}
-              keyExtractor={item => item.id.toString()}
-              renderItem={({item}) => <PostComment title={item.name} comment={item.body} />}
-          />
-      </View>
-
-    </View>
-  )
+    return (
+        <View style={styles.container}>
+            <PostContent title={postContent.title} body={postContent.body} />
+            <CommentList comments={comments} />
+        </View>
+    )
 }
 
 const styles = StyleSheet.create({

@@ -27,7 +27,7 @@ const HomeUserSearch = ({ users, setFilteredUsers }) => {
 
   return (
     <View style={styles.searchBar}>
-      <Ionicons style={[styles.icon, styles.searchIcon]} name="search" size={25} color="grey" />
+      <Ionicons style={[styles.icon, styles.searchIcon]} name="search" size={25} color="black" />
       <TextInput
         style={styles.searchInput}
         onChangeText={handleSearchChange}
@@ -57,13 +57,21 @@ function filterUsers(searchText, users) {
 
 const styles = StyleSheet.create({
   searchBar: {
-    height: 50,
+    height: 60,
     display: 'flex',
     flexDirection: 'row',
-    backgroundColor: '#e1e0e6',
-    borderRadius: 25,
+    backgroundColor: '#fff',
+    borderRadius: 20,
     marginHorizontal: 10,
-    marginTop: 20
+    marginTop: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.27,
+    shadowRadius: 4.65,
+    elevation: 6,
   },
   searchInput: {
     flex: 1,

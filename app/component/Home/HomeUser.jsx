@@ -1,41 +1,52 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, StyleSheet} from "react-native";
-import {useNavigation} from "@react-navigation/native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
 
 const HomeUser = ({ user }) => {
   const navigation = useNavigation();
 
   return (
-      <TouchableOpacity style={styles.user} onPress={() => navigation.navigate('UserDetails', {id: user.id})}>
-        <View style={styles.userImage} />
+    <TouchableOpacity style={styles.user} onPress={() => navigation.navigate('UserDetails', { id: user.id })}>
+      <View style={styles.userImage}>
+        <Ionicons style={styles.userIcon} name="person" size={25} color="white" />
+      </View>
+      <View>
         <Text style={styles.userText}>{user.name}</Text>
-      </TouchableOpacity>
+        <Text style={styles.userCompany}>{user.company.name}</Text>
+      </View>
+    </TouchableOpacity>
   )
 }
 
 
 const styles = StyleSheet.create({
   user: {
-    height: 150,
-    backgroundColor: 'rgba(239, 239, 239, 1)',
-    marginBottom: 10,
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'center',
+    height: 80,
+    marginVertical: 5,
+    marginHorizontal: 10,
+    padding: 15,
+    flexDirection: 'row',
     alignItems: 'center',
-    padding:30,
   },
   userText: {
     textAlign: 'center',
-    fontSize:20,
+    fontWeight: 'bold',
+    fontSize: 20,
 
   },
-  userImage:{
+  userImage: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     height: 50,
-    marginBottom:20,
-    width:50,
-    backgroundColor: 'grey',
-    borderRadius:50,
+    width: 50,
+    backgroundColor: '#e6e4e6',
+    borderRadius: 20,
+    marginRight: 15
+  },
+  userCompany: {
+    color: 'grey'
   }
 })
 

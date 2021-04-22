@@ -1,15 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, View} from "react-native";
-import TodoItem from "../component/UserDetails/TodoItem";
-import AlbumItem from "../component/UserDetails/AlbumItem";
+import {ScrollView} from "react-native";
 import ModalTodo from "../component/UserDetails/ModalTodo";
-import { Ionicons } from '@expo/vector-icons';
-import PostItem from "../component/UserDetails/PostItem";
-import Map from "../component/UserDetails/Map";
 import UserService from "../src/service/UserService";
 import IsConnected from "../_share/isConnected";
 import UserInfosSection from "../component/UserDetails/Section/UserInfosSection";
 import TodosSection from "../component/UserDetails/Section/TodosSection";
+import AlbumsSection from "../component/UserDetails/Section/AlbumsSection";
+import PostsSection from "../component/UserDetails/Section/PostsSection";
 const UserDetailsScreen = ({ route }) => {
 
     const [user, setUser] = useState({});
@@ -23,7 +20,7 @@ const UserDetailsScreen = ({ route }) => {
 
     useEffect(() => {
         UserService.retrieveUser(id).then(data => setUser(data));
-        UserService.retrieveTodos(id).then(data => setTodos(data.sort(todo => todo.completed)));
+        UserService.retrieveTodos(id).then(data => setTodos(data));
         UserService.retrieveAlbums(id).then(data => setAlbums(data));
         UserService.retrievePosts(id).then(data => setPosts(data));
     }, []);
@@ -36,7 +33,7 @@ const UserDetailsScreen = ({ route }) => {
             completed: false
         }
 
-        setTodos([todo, ...todos.sort(todo => todo.completed)]);
+        setTodos([todo, ...todos]);
     }
 
     return (
@@ -45,38 +42,20 @@ const UserDetailsScreen = ({ route }) => {
 
             <UserInfosSection user={user} />
 
-            <TodosSection todos={todos} />
+            <TodosSection todos={todos} onOpenModal={(title) => setModalVisible(true)}/>
 
+            <AlbumsSection albums={albums} />
 
+            <PostsSection posts={posts} />
 
-        <View style={styles.blockTitle}>
-            <Text style={styles.title}>Albums</Text>
-        </View>
-        <View style={styles.albumsBlock} />
-        <ScrollView style={{maxHeight: 300}}>
-            {
-                albums.map(album => <AlbumItem key={album.id} id={album.id} title={album.title}/>)
-            }
-        </ScrollView>
-
-
-        <View style={styles.blockTitle}>
-            <Text style={styles.title}>Posts</Text>
-        </View>
-        <ScrollView style={{maxHeight: 500}}>
-            {
-                posts.map(post => <PostItem key={post.id} id={post.id} title={post.title} />)
-            }
-        </ScrollView>
-
-        <ModalTodo
-            visible={modalVisible}
-            onSuccess={(value) => {
-                setModalVisible(false)
-                addTodo(value)
-            }}
-            onClose={() => setModalVisible(false)}
-        />
+            <ModalTodo
+                visible={modalVisible}
+                onSuccess={(value) => {
+                    setModalVisible(false)
+                    addTodo(value)
+                }}
+                onClose={() => setModalVisible(false)}
+            />
         </ScrollView>
     )
 }
@@ -86,26 +65,6 @@ const styles = {
         padding: 10,
         flex: 1,
         backgroundColor : '#fff'
-    },
-    todosSection: {
-        flex: 3
-    },
-    albumsSection: {
-        flex: 2
-    },
-    albumsBlock: {
-      height: 30,
-      backgroundColor: '#5a5a5a'
-    },
-    blockTitle: {
-        marginBottom: 15,
-        marginTop: 40,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
-    title: {
-        fontSize: 20,
     }
 }
 

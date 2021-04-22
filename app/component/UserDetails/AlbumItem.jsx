@@ -11,8 +11,10 @@ const AlbumItem = ({ id, title }) => {
       onPress={() => navigation.navigate('AlbumDetails', { id, title })}
     >
       <Image
-        source={require('./../../../assets/adaptive-icon.png')}
+        source={{uri: 'https://placehold.co/180x180'}}
         style={styles.albumItemImage}
+        resizeMode={'cover'}
+
       />
       <Text style={styles.albumItemTitle}>{title.substring(0, 40)}</Text>
     </TouchableOpacity>
@@ -21,24 +23,22 @@ const AlbumItem = ({ id, title }) => {
 
 const styles = StyleSheet.create({
   albumItemContainer: {
-    flex: 1,
-    alignItems: 'center',
-    flexDirection: 'row',
-    height: 100,
-    marginBottom: 16
+    marginBottom: 16,
+    width: '48%',
   },
   albumItemImage: {
     flex: 1,
-    height: 100,
-    borderWidth: 1,
-    borderColor: 'grey'
+    width: '100%',
+    height: 180,
+    backgroundColor: '#ddd'
   },
   albumItemTitle: {
     flex: 2,
     alignItems: 'center',
-    marginLeft: 16,
-    fontWeight: 'bold',
-    textTransform: 'uppercase'
+    fontWeight: '600',
+    fontSize: 12,
+    textTransform: 'uppercase',
+    marginTop: 10
   }
 })
 

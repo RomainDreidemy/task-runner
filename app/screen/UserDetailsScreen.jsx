@@ -8,6 +8,8 @@ import PostItem from "../component/UserDetails/PostItem";
 import Map from "../component/UserDetails/Map";
 import UserService from "../src/service/UserService";
 import IsConnected from "../_share/isConnected";
+import UserInfosSection from "../component/UserDetails/Section/UserInfosSection";
+import TodosSection from "../component/UserDetails/Section/TodosSection";
 const UserDetailsScreen = ({ route }) => {
 
     const [user, setUser] = useState({});
@@ -40,32 +42,12 @@ const UserDetailsScreen = ({ route }) => {
     return (
         <ScrollView style={styles.container}>
             <IsConnected />
-        <View>
-            <View style={styles.infosSection}>
-                <View style={{padding: 20}}>
-                    <Text style={styles.infoLine}>Nom: {user.name}</Text>
-                    <Text style={styles.infoLine}>Société: {user.company?.name}</Text>
-                    <Text style={styles.infoLine}>Email: {user.email}</Text>
-                    <Text style={styles.infoLine}>Téléphone: {user.phone}</Text>
-                </View>
 
-                {
-                    user.name ? <Map user_id={user.id} title={user.name} lat={user.address.geo.lat} lng={user.address.geo.lng} /> : <Text>Loading...</Text>
-                }
-            </View>
-        </View>
+            <UserInfosSection user={user} />
 
-        <View style={styles.todosSection}>
-            <View style={styles.blockTitle}>
-                <Text style={styles.title}>TODOs</Text>
-                <Ionicons  name="add-sharp" size={30} onPress={() => setModalVisible(true)} />
-            </View>
-            <ScrollView style={{maxHeight: 300}}>
-                {
-                    todos.map(todo => <TodoItem key={todo.id} id={todo.id} title={todo.title} completed={todo.completed}/>)
-                }
-            </ScrollView>
-        </View>
+            <TodosSection todos={todos} />
+
+
 
         <View style={styles.blockTitle}>
             <Text style={styles.title}>Albums</Text>
@@ -105,16 +87,6 @@ const styles = {
         flex: 1,
         backgroundColor : '#fff'
     },
-    infosSection: {
-        border: 1,
-        borderRadius: 15,
-        borderColor: '#eee',
-        backgroundColor: '#fff',
-        overflow: 'hidden'
-    },
-    infoLine: {
-        marginBottom: 5,
-    },
     todosSection: {
         flex: 3
     },
@@ -134,9 +106,6 @@ const styles = {
     },
     title: {
         fontSize: 20,
-    },
-    map: {
-        height: 250
     }
 }
 

@@ -1,12 +1,9 @@
 import {Switch, Text, View} from "react-native";
 import React, {useEffect, useState} from "react";
-import {useNavigation} from "@react-navigation/native";
 
-const TodoItem = ({id, title, completed}) => {
+const TodoItem = ({title, completed}) => {
 
     const [isCompleted, setIsCompleted] = useState(false);
-
-    const navigation = useNavigation();
 
     useEffect(() => {
         setIsCompleted(completed);
@@ -16,11 +13,11 @@ const TodoItem = ({id, title, completed}) => {
     return (
         <View
             style={isCompleted ? {...styles.global.container, ...styles.completedYes.container} : {...styles.global.container, ...styles.completedNo.container}}>
-            <Text style={styles.global.text}>{title.substring(0, 30)}{title.length > 30 ? '...' : ''}</Text>
+            <Text style={isCompleted ? styles.completedYes.text : styles.global.text}>{title.substring(0, 30)}{title.length > 30 ? '...' : ''}</Text>
             <Switch
-                trackColor={{ false: "red", true: "green" }}
+                trackColor={{ false: "#E5E5E5", true: "#46AAF2" }}
                 thumbColor={isCompleted ? "#fff" : "#fff"}
-                ios_backgroundColor="red"
+                ios_backgroundColor="#E5E5E5"
                 onValueChange={(val) => setIsCompleted(val)}
                 value={isCompleted}
             />
@@ -31,28 +28,32 @@ const TodoItem = ({id, title, completed}) => {
 const styles = {
     global: {
         container: {
-            height: 50,
+            height: 40,
             marginBottom: 10,
             flexDirection: 'row',
             justifyContent: 'space-between',
             padding: 10,
             alignItems: 'center',
-            border: 1,
-            borderRadius: 5,
-            borderColor: 'transparent',
+            borderBottomWidth: 1,
+            // borderRadius: 5,
+            borderColor: '#909090',
         },
         text: {
-            color: '#fff'
+            color: '#909090'
         }
     },
     completedYes: {
         container: {
-            backgroundColor: '#79c194',
+            // backgroundColor: '#79c194',
+        },
+        text: {
+            color: '#909090',
+            textDecorationLine: 'line-through'
         }
     },
     completedNo: {
         container: {
-            backgroundColor: '#e37885',
+            // backgroundColor: '#e37885',
         }
     }
 }

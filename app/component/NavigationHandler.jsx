@@ -15,18 +15,22 @@ const NavigationHandler = () => {
                 <Stack.Screen
                     name="Home"
                     component={HomeScreen}
+                    options={{headerShown: false}}
                 />
                 <Stack.Screen
                     name="UserDetails"
                     component={UserDetailsScreen}
+                    options={{title: 'Fiche d\'information', headerBackTitle: 'Accueil'}}
                 />
                 <Stack.Screen
                     name="AlbumDetails"
                     component={AlbumDetailsScreen}
+                    options={{title: 'Mon album', headerBackTitle: 'Retour'}}
                 />
                 <Stack.Screen
                     name="PostDetails"
                     component={PostDetailsScreen}
+                    options={{title: 'Mon article', headerBackTitle: 'Retour'}}
                 />
             </Stack.Navigator>
         </NavigationContainer>

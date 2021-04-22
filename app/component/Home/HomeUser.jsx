@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     backgroundColor: '#e6e4e6',
-    borderRadius: 20,
+    borderRadius: 500,
     marginRight: 15
   },
   userCompany: {

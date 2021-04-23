@@ -1,33 +1,40 @@
 import React, { useCallback, useState } from 'react';
 import { StyleSheet, View, TextInput, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import debounce from "lodash.debounce";
+import debounce from 'lodash.debounce';
 
 const HomeUserSearch = ({ users, setFilteredUsers }) => {
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   const handleSearchChange = (searchValue) => {
-    setSearchText(searchValue)
-    searchUsers(searchValue, users)
-  }
+    setSearchText(searchValue);
+    searchUsers(searchValue, users);
+  };
 
   const resetSearch = () => {
-    setSearchText("")
-    setFilteredUsers(users)
-  }
+    setSearchText('');
+    setFilteredUsers(users);
+  };
 
   const searchUsers = useCallback(
     debounce((searchValue, users) => {
       if (!searchValue) {
-        setFilteredUsers(users)
+        setFilteredUsers(users);
       } else {
-        setFilteredUsers(filterUsers(searchValue, users))
+        setFilteredUsers(filterUsers(searchValue, users));
       }
-    }, 200), [])
+    }, 200),
+    []
+  );
 
   return (
     <View style={styles.searchBar}>
-      <Ionicons style={[styles.icon, styles.searchIcon]} name="search" size={25} color="black" />
+      <Ionicons
+        style={[styles.icon, styles.searchIcon]}
+        name="search"
+        size={25}
+        color="black"
+      />
       <TextInput
         style={styles.searchInput}
         onChangeText={handleSearchChange}
@@ -35,24 +42,25 @@ const HomeUserSearch = ({ users, setFilteredUsers }) => {
         placeholder="Search by name"
       />
 
-      {searchText.length > 0 &&
-        <Pressable
-          style={styles.searchReset}
-          onPress={resetSearch}
-        >
-          <Ionicons style={styles.resetIcon} name="close-circle" size={25} color="grey" />
+      {searchText.length > 0 && (
+        <Pressable style={styles.searchReset} onPress={resetSearch}>
+          <Ionicons
+            style={styles.resetIcon}
+            name="close-circle"
+            size={25}
+            color="grey"
+          />
         </Pressable>
-      }
-
+      )}
     </View>
-  )
-}
+  );
+};
 
 export default HomeUserSearch;
 
 function filterUsers(searchText, users) {
-  const searchRegex = new RegExp(searchText, 'i')
-  return users.filter((user) => searchRegex.test(user.name))
+  const searchRegex = new RegExp(searchText, 'i');
+  return users.filter((user) => searchRegex.test(user.name));
 }
 
 const styles = StyleSheet.create({
@@ -65,18 +73,18 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     marginHorizontal: 10,
     marginTop: 20,
-    shadowColor: "#000",
+    shadowColor: '#000',
     shadowOffset: {
       width: 0,
-      height: 3,
+      height: 3
     },
     shadowOpacity: 0.27,
     shadowRadius: 4.65,
-    elevation: 6,
+    elevation: 6
   },
   searchInput: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 16
   },
   icon: {
     textAlignVertical: 'center'
@@ -90,4 +98,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     opacity: 0.5
   }
-})
+});

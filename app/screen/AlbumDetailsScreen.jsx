@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,34 +7,34 @@ import {
   Modal,
   View,
   Pressable
-} from 'react-native'
-import AlbumApi from '../src/api/AlbumApi'
+} from 'react-native';
+import AlbumApi from '../src/api/AlbumApi';
 
-const AlbumDetailsScreen = ({ navigation, route }) => {
-  const { id, title } = route.params
+const AlbumDetailsScreen = ({ route }) => {
+  const { id, title } = route.params;
 
-  const [photos, setPhotos] = useState([])
-  const [selectedPhoto, setSelectedPhoto] = useState('')
-  const [modalVisible, setModalVisible] = useState(false)
+  const [photos, setPhotos] = useState([]);
+  const [selectedPhoto, setSelectedPhoto] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
 
-  const onPhotoClick = photo => {
-    setSelectedPhoto(photo)
-  }
+  const onPhotoClick = (photo) => {
+    setSelectedPhoto(photo);
+  };
 
   useEffect(() => {
-    AlbumApi.getPhotoByAlbum(id).then(data => setPhotos(data))
-  }, [])
+    AlbumApi.getPhotoByAlbum(id).then((data) => setPhotos(data));
+  }, []);
 
   return (
     <ScrollView style={styles.albumDetailsContainer}>
       <Text style={styles.albumDetailsTitle}>{title}</Text>
 
-      {photos.map(photo => (
+      {photos.map((photo) => (
         <View key={photo.id}>
           <Pressable
             onPress={() => {
-              setModalVisible(!modalVisible)
-              onPhotoClick(photo)
+              setModalVisible(!modalVisible);
+              onPhotoClick(photo);
             }}
           >
             <Image
@@ -47,11 +47,11 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
       ))}
 
       <Modal
-        animationType='fade'
+        animationType="fade"
         transparent
         visible={modalVisible}
         onRequestClose={() => {
-          setModalVisible(!modalVisible)
+          setModalVisible(!modalVisible);
         }}
       >
         <View style={styles.centeredView}>
@@ -70,8 +70,8 @@ const AlbumDetailsScreen = ({ navigation, route }) => {
         </View>
       </Modal>
     </ScrollView>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   centeredView: {
@@ -111,6 +111,6 @@ const styles = StyleSheet.create({
     width: 'auto',
     marginBottom: 16
   }
-})
+});
 
-export default AlbumDetailsScreen
+export default AlbumDetailsScreen;

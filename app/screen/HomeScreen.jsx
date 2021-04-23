@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
-import { StyleSheet, View, TextInput } from 'react-native';
-import HomeMap from "../component/Home/HomeMap";
-import HomeUserSearch from "../component/Home/HomeUserSearch";
-import HomeUserList from "../component/Home/HomeUserList";
-import UserService from "../src/service/UserService";
-import IsConnected from "../_share/isConnected";
+import { StyleSheet, View } from 'react-native';
+import HomeMap from '../component/Home/HomeMap';
+import HomeUserSearch from '../component/Home/HomeUserSearch';
+import HomeUserList from '../component/Home/HomeUserList';
+import UserService from '../src/service/UserService';
+import IsConnected from '../_share/isConnected';
 
 const HomeScreen = () => {
   const [users, setUsers] = useState([]);
@@ -13,14 +13,15 @@ const HomeScreen = () => {
 
   useEffect(() => {
     UserService.retrieveUsers()
-      .then(users => {
-        setUsers(users)
-        setFilteredUsers(users)
-      }).catch(() => {
-        setUsers([])
-        setFilteredUsers([])
+      .then((users) => {
+        setUsers(users);
+        setFilteredUsers(users);
       })
-  }, [])
+      .catch(() => {
+        setUsers([]);
+        setFilteredUsers([]);
+      });
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -32,9 +33,8 @@ const HomeScreen = () => {
 
       <HomeMap users={filteredUsers} />
     </View>
-
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   container: {

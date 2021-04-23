@@ -1,24 +1,31 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 
 const HomeUser = ({ user }) => {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity style={styles.user} onPress={() => navigation.navigate('UserDetails', { id: user.id })}>
+    <TouchableOpacity
+      style={styles.user}
+      onPress={() => navigation.navigate('UserDetails', { id: user.id })}
+    >
       <View style={styles.userImage}>
-        <Ionicons style={styles.userIcon} name="person" size={25} color="white" />
+        <Ionicons
+          style={styles.userIcon}
+          name="person"
+          size={25}
+          color="white"
+        />
       </View>
       <View>
         <Text style={styles.userText}>{user.name}</Text>
         <Text style={styles.userCompany}>{user.company.name}</Text>
       </View>
     </TouchableOpacity>
-  )
-}
-
+  );
+};
 
 const styles = StyleSheet.create({
   user: {
@@ -27,13 +34,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     padding: 15,
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'center'
   },
   userText: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 20,
-
+    fontSize: 20
   },
   userImage: {
     display: 'flex',
@@ -48,7 +54,6 @@ const styles = StyleSheet.create({
   userCompany: {
     color: 'grey'
   }
-})
-
+});
 
 export default HomeUser;

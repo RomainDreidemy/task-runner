@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 class BaseApi {
   API_URL = `https://jsonplaceholder.cypress.io`;

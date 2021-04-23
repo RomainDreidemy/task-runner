@@ -1,9 +1,9 @@
-import { Image, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import React from 'react'
-import { useNavigation } from '@react-navigation/native'
+import { Image, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const AlbumItem = ({ id, title }) => {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
 
   return (
     <TouchableOpacity
@@ -11,20 +11,19 @@ const AlbumItem = ({ id, title }) => {
       onPress={() => navigation.navigate('AlbumDetails', { id, title })}
     >
       <Image
-        source={{uri: 'https://placehold.co/180x180'}}
+        source={{ uri: 'https://placehold.co/180x180' }}
         style={styles.albumItemImage}
         resizeMode={'cover'}
-
       />
       <Text style={styles.albumItemTitle}>{title.substring(0, 40)}</Text>
     </TouchableOpacity>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
   albumItemContainer: {
     marginBottom: 16,
-    width: '48%',
+    width: '48%'
   },
   albumItemImage: {
     flex: 1,
@@ -40,6 +39,6 @@ const styles = StyleSheet.create({
     textTransform: 'uppercase',
     marginTop: 10
   }
-})
+});
 
-export default AlbumItem
+export default AlbumItem;

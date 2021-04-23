@@ -9,21 +9,27 @@ import {
   Pressable
 } from 'react-native'
 import AlbumApi from '../src/api/AlbumApi'
+import Loading from "../_share/Loading";
 
 const AlbumDetailsScreen = ({ route }) => {
   const { id, title } = route.params
 
-  const [photos, setPhotos] = useState([])
-  const [selectedPhoto, setSelectedPhoto] = useState('')
-  const [modalVisible, setModalVisible] = useState(false)
+  const [photos, setPhotos] = useState([]);
+  const [selectedPhoto, setSelectedPhoto] = useState('');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const [loading, setLoading] = useState(true);
 
   const onPhotoClick = photo => {
     setSelectedPhoto(photo)
   }
 
   useEffect(() => {
-    AlbumApi.getPhotoByAlbum(id).then(data => setPhotos(data))
+    AlbumApi.getPhotoByAlbum(id).then(data => setPhotos(data)).finally(() => setLoading(false   ))
   }, [])
+
+  if(loading)
+    return <Loading />
 
   return (
     <ScrollView style={styles.albumDetailsContainer}>
@@ -53,6 +59,7 @@ const AlbumDetailsScreen = ({ route }) => {
         onRequestClose={() => {
           setModalVisible(!modalVisible)
         }}
+        style={{height: '100%'}}
       >
         <View style={styles.centeredView}>
           <Pressable
@@ -79,7 +86,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderColor: 'green'
+    borderColor: 'green',
+    height: '100%'
   },
   modalContainer: {
     alignItems: 'center',
@@ -92,13 +100,14 @@ const styles = StyleSheet.create({
   },
   modalImage: {
     flex: 1,
-    width: '100%'
+    width: '100%',
     // width: '100%',
     // backgroundColor: 'coral'
   },
   albumDetailsContainer: {
     flex: 1,
-    padding: 16
+    padding: 16,
+    backgroundColor: '#fff'
   },
   albumDetailsTitle: {
     marginBottom: 24,

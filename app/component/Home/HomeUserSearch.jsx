@@ -3,7 +3,7 @@ import { StyleSheet, View, TextInput, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import debounce from "lodash.debounce";
 
-const HomeUserSearch = ({ users, setFilteredUsers }) => {
+const HomeUserSearch = ({ users, setFilteredUsers, loading }) => {
   const [searchText, setSearchText] = useState("");
 
   const handleSearchChange = (searchValue) => {

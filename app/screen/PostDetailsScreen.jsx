@@ -4,16 +4,19 @@ import PostApi from './../src/api/PostApi'
 import PostContent from './../component/PostContent'
 import PostComment from '../component/PostComment'
 import CommentList from "../component/PostDetails/CommentList";
+import Loading from "../_share/Loading";
 
 const PostDetailsScreen = ({ route }) => {
   const { id } = route.params
 
-  const [postContent, setPostContent] = useState({})
-  const [comments, setComments] = useState([])
+  const [postContent, setPostContent] = useState({});
+  const [comments, setComments] = useState([]);
+
+    const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      PostApi.getPost(id).then(data => setPostContent(data))
-      PostApi.getCommentsByPost(id).then(data => setComments(data))
+      PostApi.getPost(id).then(data => setPostContent(data)).finally(() => setLoading(false))
+      PostApi.getCommentsByPost(id).then(data => setComments(data)).finally(() => setLoading(false))
   }, [])
 
     const addComment = (text) => {
@@ -28,6 +31,9 @@ const PostDetailsScreen = ({ route }) => {
             setComments([comment, ...comments]);
         }
     }
+
+    if(loading)
+        return <Loading />
 
     return (
         <View style={styles.container}>

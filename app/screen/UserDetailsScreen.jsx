@@ -7,6 +7,7 @@ import UserInfosSection from "../component/UserDetails/Section/UserInfosSection"
 import TodosSection from "../component/UserDetails/Section/TodosSection";
 import AlbumsSection from "../component/UserDetails/Section/AlbumsSection";
 import PostsSection from "../component/UserDetails/Section/PostsSection";
+import Loading from "../_share/Loading";
 const UserDetailsScreen = ({ route }) => {
 
     const [user, setUser] = useState({});
@@ -16,13 +17,15 @@ const UserDetailsScreen = ({ route }) => {
 
     const [modalVisible, setModalVisible] = useState(false);
 
+    const [loading, setLoading] = useState(true);
+
     const {id} = route.params;
 
     useEffect(() => {
-        UserService.retrieveUser(id).then(data => setUser(data));
-        UserService.retrieveTodos(id).then(data => setTodos(data));
-        UserService.retrieveAlbums(id).then(data => setAlbums(data));
-        UserService.retrievePosts(id).then(data => setPosts(data));
+        UserService.retrieveUser(id).then(data => setUser(data)).finally(() => setLoading(false));
+        UserService.retrieveTodos(id).then(data => setTodos(data)).finally(() => setLoading(false));
+        UserService.retrieveAlbums(id).then(data => setAlbums(data)).finally(() => setLoading(false));
+        UserService.retrievePosts(id).then(data => setPosts(data)).finally(() => setLoading(false));
     }, []);
 
     const addTodo = (title) => {
@@ -35,6 +38,10 @@ const UserDetailsScreen = ({ route }) => {
 
         setTodos([todo, ...todos]);
     }
+
+
+    if(loading)
+        return <Loading />
 
     return (
         <ScrollView style={styles.container}>

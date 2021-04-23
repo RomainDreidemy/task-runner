@@ -12,10 +12,14 @@ const HomeScreen = () => {
   const [filteredUsers, setFilteredUsers] = useState([]);
 
   useEffect(() => {
-    UserService.retrieveUsers().then(users => {
-      setUsers(users)
-      setFilteredUsers(users)
-    });
+    UserService.retrieveUsers()
+      .then(users => {
+        setUsers(users)
+        setFilteredUsers(users)
+      }).catch(() => {
+        setUsers([])
+        setFilteredUsers([])
+      })
   }, [])
 
   return (

@@ -2,20 +2,16 @@ import LocalStorageService from "./LocalStorageService";
 import UserApi from "../api/UserApi";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-class UserService
-{
-    async retrieveUsers()
-    {
-        return LocalStorageService.get('users', true).then(data => {
-            if (data === null){
-                UserApi.getUsers().then(data => {
-                    LocalStorageService.set('users', data, true)
-                    return data;
-                })
-            }
-            else
-                return data;
-        })
+class UserService {
+    async retrieveUsers() {
+        const locallyStoredUsers = await LocalStorageService.get('users', true)
+        if (locallyStoredUsers === null) {
+            const fetchedUsers = await UserApi.getUsers()
+            LocalStorageService.set('users', fetchedUsers, true)
+            return fetchedUsers;
+        } else {
+            return data
+        }
     }
 
     async retrieveUser(id)

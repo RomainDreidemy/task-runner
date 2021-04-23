@@ -10,33 +10,28 @@ const PostDetailsScreen = ({ route }) => {
   const [postContent, setPostContent] = useState({});
   const [comments, setComments] = useState([]);
 
-  const [commentName, setCommentName] = useState('');
-  const [commentContent, setCommentContent] = useState('');
-
   useEffect(() => {
     PostApi.getPost(id).then((data) => setPostContent(data));
     PostApi.getCommentsByPost(id).then((data) => setComments(data));
   }, []);
 
-  const addComment = () => {
-    if (commentName !== '' && commentContent !== '') {
+  const addComment = (commentAuthor, commentContent) => {
+    if (commentAuthor && commentContent) {
       const comment = {
-        name: commentName,
+        name: commentAuthor,
         body: commentContent,
         userId: 1,
         id: comments[comments.length - 1].id + 1
       };
 
       setComments([comment, ...comments]);
-      setCommentName('');
-      setCommentContent('');
     }
   };
 
   return (
     <View style={styles.container}>
       <PostContent title={postContent.title} body={postContent.body} />
-      <CommentList comments={comments} />
+      <CommentList comments={comments} addComment={addComment} />
     </View>
   );
 };

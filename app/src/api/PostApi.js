@@ -1,7 +1,7 @@
 import BaseApi from "./BaseApi";
 
 class PostApi extends BaseApi{
-    async getPost(id) 
+    async getPost(id)
     {
         const {data} = await this.get(`/posts/${id}`)
         return data

@@ -1,15 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import {Button, FlatList, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import PostComment from "../PostComment";
 import { Ionicons } from '@expo/vector-icons';
 
-const CommentList = ({ comments = []}) => {
+const CommentList = ({ comments = [], onPostAdd}) => {
+    const [newComment, setNewComment] = useState("");
+
     return (
         <View style={styles.comments}>
             <View style={{borderBottomWidth: 1, borderBottomColor: '#eee', marginBottom: 15}} />
             <Text style={styles.title}>Commentaires</Text>
-
-
 
             <FlatList
                 data={comments}
@@ -17,9 +17,12 @@ const CommentList = ({ comments = []}) => {
                 renderItem={({item}) => <PostComment title={item.name} comment={item.body} />}
             />
             <View style={styles.newComment}>
-                <TextInput style={styles.input} placeholder={'Écrire un commentaire'}  />
+                <TextInput style={styles.input} placeholder={'Écrire un commentaire'} value={newComment} onChangeText={setNewComment} />
                 <Pressable
-                    onPress={() => addComment()}
+                    onPress={() => {
+                        onPostAdd(newComment)
+                        setNewComment("");
+                    }}
                     style={styles.button}
                 >
                     <Ionicons name="send" size={20} color="white" />

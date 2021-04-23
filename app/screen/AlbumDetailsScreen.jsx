@@ -10,7 +10,7 @@ import {
 } from 'react-native'
 import AlbumApi from '../src/api/AlbumApi'
 
-const AlbumDetailsScreen = ({ navigation, route }) => {
+const AlbumDetailsScreen = ({ route }) => {
   const { id, title } = route.params
 
   const [photos, setPhotos] = useState([])

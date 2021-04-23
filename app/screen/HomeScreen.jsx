@@ -13,9 +13,9 @@ const HomeScreen = () => {
 
   useEffect(() => {
     UserService.retrieveUsers().then(users => {
-      setUsers(users)
+      setUsers(users ?? [])
       setFilteredUsers(users)
-    });
+    }).catch(() => setUsers([]));
   }, [])
 
   return (

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 class BaseApi {
-    API_URL=`https://jsonplaceholder.typicode.com`
+    API_URL=`https://jsonplaceholder.cypress.io`
 
     async get(url) {
         return await axios.get(`${this.API_URL}${url}`);

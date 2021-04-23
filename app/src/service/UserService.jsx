@@ -10,11 +10,14 @@ class UserService
             if (data === null){
                 UserApi.getUsers().then(data => {
                     LocalStorageService.set('users', data, true)
-                    return data;
+                    return data ?? [];
                 })
+                    .catch(() => {
+                        return []
+                    })
             }
             else
-                return data;
+                return data ?? [];
         })
     }
 
